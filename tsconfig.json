@@ -1,0 +1,14 @@
+{
+  "compilerOptions": {
+    "target": "ES2015",            // Versión de JavaScript de salida
+    "module": "commonjs",          // Usamos módulos CommonJS (para Node.js)
+    "esModuleInterop": true,       // Habilitar interoperabilidad entre módulos ES y CommonJS
+    "strict": true,                // Habilita comprobaciones estrictas de TypeScript
+    "skipLibCheck": true,          // Evitar verificar tipos en los archivos de declaración de terceros
+    "outDir": "./dist",            // Carpeta donde se colocarán los archivos compilados
+    "rootDir": "./src",            // Carpeta raíz del proyecto TypeScript
+    "resolveJsonModule": true      // Permitir la importación de archivos JSON
+  },
+  "include": ["src/**/*.ts"],       // Incluir todos los archivos TypeScript en la carpeta src
+  "exclude": ["node_modules"]       // Excluir la carpeta node_modules
+}
