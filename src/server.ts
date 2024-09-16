@@ -9,12 +9,12 @@ dotenv.config();
 const app = express();
 const server = http.createServer(app);
 
-// Configuración de Socket.IO
+// Configuración de Socket.IO con CORS
 const io = new SocketIOServer(server, {
   cors: {
-    origin: process.env.FRONTEND_URL || "*", // Asegúrate de tener la URL correcta de tu frontend
+    origin: process.env.FRONTEND_URL || "*", // URL de tu frontend
     methods: ["GET", "POST"],
-    credentials: true, // Habilitar credenciales con WebSockets
+    credentials: true, // Permitir credenciales (cookies) con WebSockets
   },
   transports: ["websocket", "polling"], // Permitir tanto websocket como polling
 });
