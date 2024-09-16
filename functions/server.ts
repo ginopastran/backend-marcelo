@@ -51,10 +51,9 @@ io.on("connection", (socket) => {
     console.log(`Cliente desconectado ${socket.id}`);
   });
 });
-
-// Adaptación para Netlify Functions
 const router = express.Router();
-router.use("/.netlify/functions/server", app);
+app.use("/.netlify/functions/server", router);
+// Adaptación para Netlify Functions
 
 // Exportar el handler para Netlify Functions
 export const handler = serverless(app);
