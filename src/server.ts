@@ -1,8 +1,8 @@
 import express from "express";
 import http from "http";
 import { Server as SocketIOServer } from "socket.io";
+import cors from "cors";
 import dotenv from "dotenv";
-import serverless from "serverless-http";
 
 // Cargar las variables de entorno desde el archivo .env
 dotenv.config();
@@ -10,14 +10,22 @@ dotenv.config();
 const app = express();
 const server = http.createServer(app);
 
+// Configurar CORS para permitir el acceso desde tu frontend
+app.use(
+  cors({
+    origin: process.env.FRONTEND_URL || "*", // URL de tu frontend, o "*" para permitir todos
+    methods: ["GET", "POST"],
+    credentials: true, // Permite enviar cookies y credenciales
+  })
+);
+
 // Configuración de Socket.IO con CORS
 const io = new SocketIOServer(server, {
   cors: {
-    origin: process.env.FRONTEND_URL || "*", // URL de tu frontend
+    origin: process.env.FRONTEND_URL || "*", // Asegúrate de tener la URL correcta de tu frontend
     methods: ["GET", "POST"],
-    credentials: true, // Permitir credenciales (cookies) con WebSockets
+    credentials: true, // Habilitar credenciales con WebSockets
   },
-  transports: ["websocket", "polling"], // Permitir tanto websocket como polling
 });
 
 // Middleware para permitir JSON en el cuerpo de las peticiones
@@ -51,9 +59,9 @@ io.on("connection", (socket) => {
     console.log(`Cliente desconectado ${socket.id}`);
   });
 });
-const router = express.Router();
-app.use("/.netlify/functions/server", router);
-// Adaptación para Netlify Functions
 
-// Exportar el handler para Netlify Functions
-export const handler = serverless(app);
+// Inicializamos el servidor en el puerto definido en .env o 4000 por defecto
+const PORT = process.env.PORT || 4000;
+server.listen(PORT, () => {
+  console.log(`Servidor escuchando en http://localhost:${PORT}`);
+});
