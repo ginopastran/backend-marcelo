@@ -13,7 +13,7 @@ const server = http.createServer(app);
 // Configurar CORS para permitir el acceso desde tu frontend
 app.use(
   cors({
-    origin: process.env.FRONTEND_URL || "*", // URL de tu frontend, o "*" para permitir todos
+    origin: process.env.FRONTEND_URL || "*", // URL de tu frontend
     methods: ["GET", "POST"],
     credentials: true, // Permite enviar cookies y credenciales
   })
@@ -26,6 +26,7 @@ const io = new SocketIOServer(server, {
     methods: ["GET", "POST"],
     credentials: true, // Habilitar credenciales con WebSockets
   },
+  transports: ["websocket", "polling"], // Permitir tanto websocket como polling
 });
 
 // Middleware para permitir JSON en el cuerpo de las peticiones
