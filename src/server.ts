@@ -1,7 +1,6 @@
 import express from "express";
 import http from "http";
 import { Server as SocketIOServer } from "socket.io";
-import cors from "cors";
 import dotenv from "dotenv";
 
 // Cargar las variables de entorno desde el archivo .env
@@ -10,16 +9,7 @@ dotenv.config();
 const app = express();
 const server = http.createServer(app);
 
-// Configurar CORS para permitir el acceso desde tu frontend
-app.use(
-  cors({
-    origin: process.env.FRONTEND_URL || "*", // URL de tu frontend
-    methods: ["GET", "POST"],
-    credentials: true, // Permite enviar cookies y credenciales
-  })
-);
-
-// Configuración de Socket.IO con CORS
+// Configuración de Socket.IO
 const io = new SocketIOServer(server, {
   cors: {
     origin: process.env.FRONTEND_URL || "*", // Asegúrate de tener la URL correcta de tu frontend
