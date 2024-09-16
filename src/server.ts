@@ -21,6 +21,11 @@ const io = new SocketIOServer(server, {
 app.use(express.json());
 app.use(cors());
 
+// Ruta principal para mostrar "Hello World"
+app.get("/", (req, res) => {
+  res.send("Hello World");
+});
+
 // Ruta para recibir el evento desde la API de Next.js
 app.post("/api/socket", (req, res) => {
   const { event, data } = req.body;
