@@ -2,6 +2,7 @@ import express from "express";
 import http from "http";
 import { Server as SocketIOServer } from "socket.io";
 import dotenv from "dotenv";
+import serverless from "serverless-http";
 
 // Cargar las variables de entorno desde el archivo .env
 dotenv.config();
@@ -51,8 +52,9 @@ io.on("connection", (socket) => {
   });
 });
 
-// Inicializamos el servidor en el puerto definido en .env o 4000 por defecto
-const PORT = process.env.PORT || 4000;
-server.listen(PORT, () => {
-  console.log(`Servidor escuchando en http://localhost:${PORT}`);
-});
+// Adaptación para Netlify Functions
+const router = express.Router();
+router.use("/.netlify/functions/server", app);
+
+// Exportar el handler para Netlify Functions
+export const handler = serverless(app);
