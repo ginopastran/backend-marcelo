@@ -1,14 +1,14 @@
 {
   "compilerOptions": {
+    "outDir": "./dist",   
+    "rootDir": "./src",   
     "target": "ES2015",
     "module": "commonjs",
     "esModuleInterop": true,
     "strict": true,
     "skipLibCheck": true,
-    "outDir": "./dist",
-    "rootDir": ".",                 // Cambia el rootDir a la carpeta raíz del proyecto
     "resolveJsonModule": true
   },
-  "include": ["src/**/*.ts", "functions/**/*.ts"],       // Incluir archivos de TypeScript en src y functions
+  "include": ["src/**/*.ts"],
   "exclude": ["node_modules"]
 }
