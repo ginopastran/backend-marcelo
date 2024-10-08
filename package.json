@@ -1,7 +1,7 @@
 {
   "name": "backend-marcelo",
   "version": "1.0.0",
-  "main": "index.js",
+  "main": "dist/index.js",
   "scripts": {
     "postinstall": "npm run build",
     "start": "node dist/server.js",
