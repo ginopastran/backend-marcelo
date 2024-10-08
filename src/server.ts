@@ -14,7 +14,7 @@ const server = http.createServer(app);
 // Configurar CORS para permitir el acceso desde tu frontend
 app.use(
   cors({
-    origin: process.env.FRONTEND_URL || "*", // URL de tu frontend
+    origin: "*", // URL de tu frontend
     methods: ["GET", "POST"],
     credentials: true,
   })
@@ -23,7 +23,7 @@ app.use(
 // Configuración de Socket.IO con CORS
 const io = new SocketIOServer(server, {
   cors: {
-    origin: process.env.FRONTEND_URL || "*",
+    origin: "*",
     methods: ["GET", "POST"],
     credentials: true,
   },
