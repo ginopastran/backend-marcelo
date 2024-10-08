@@ -164,7 +164,7 @@ io.on("connection", (socket) => {
   });
 });
 
-const PORT = process.env.PORT || 4000;
-server.listen(PORT, () => {
-  console.log(`Servidor escuchando en http://localhost:${PORT}`);
+const port = Number(process.env.PORT) || 4000;
+server.listen(port, "0.0.0.0", () => {
+  console.log(`Servidor escuchando en http://localhost:${port}`);
 });
