@@ -14,7 +14,7 @@ const server = http.createServer(app);
 // Configurar CORS para permitir el acceso desde tu frontend
 app.use(
   cors({
-    origin: "*", // URL de tu frontend
+    origin: process.env.FRONTEND_URL || "*", // URL de tu frontend
     methods: ["GET", "POST"],
     credentials: true,
   })
@@ -23,7 +23,7 @@ app.use(
 // Configuración de Socket.IO con CORS
 const io = new SocketIOServer(server, {
   cors: {
-    origin: "*",
+    origin: process.env.FRONTEND_URL || "*",
     methods: ["GET", "POST"],
     credentials: true,
   },
@@ -164,7 +164,7 @@ io.on("connection", (socket) => {
   });
 });
 
-const port = Number(process.env.PORT) || 4000;
-server.listen(port, "0.0.0.0", () => {
-  console.log(`Servidor escuchando en http://localhost:${port}`);
+const PORT = process.env.PORT || 4000;
+server.listen(PORT, () => {
+  console.log(`Servidor escuchando en http://localhost:${PORT}`);
 });
